@@ -19,8 +19,17 @@
 
 // Turning off the stack protector for this file improves
 // the performance of drawing operations when called frequently.
+// 它告诉编译器在编译代码时禁用栈保护（stack protector）功能。
+// 禁用栈保护可能会提高程序的运行性能，
+// 因为省去了插入和检查栈金丝雀的开销，
+// 但同时也会降低程序的安全性，
+// 使其更容易受到栈溢出攻击。
+// 因此，除非有充分的理由（例如性能优化需求），
+// 通常不建议禁用栈保护。
 #pragma GCC optimize("no-stack-protector")
 
+// 定义一个内核模式？
+// 如果定义了KERNEL_MODE，就将#ifdef KERNEL_MODE包含的代码编译进来
 #ifdef KERNEL_MODE
 
 #include <trezor_bsp.h>
@@ -30,36 +39,57 @@
 #include <gfx/gfx_color.h>
 
 // Number of DMA2D layers - background (0) and foreground (1)
+// 宏
 #define DMA2D_LAYER_COUNT 2
 
 typedef struct {
   // Set if the driver is initialized
+  // 表示是否被初始化
   bool initialized;
   // ST DMA2D driver handle
+  /*这是一个 DMA2D 驱动程序的句柄（handle），
+  用于存储与 DMA2D 硬件相关的配置信息和状态。
+  `DMA2D_HandleTypeDef` 是一个结构体类型，
+  通常由硬件抽象层（HAL）库定义，
+  用于管理 DMA2D 控制器。 */
   DMA2D_HandleTypeDef handle;
   // CLUT cache
   struct {
-    gfx_color32_t c_fg;
-    gfx_color32_t c_bg;
+    gfx_color32_t c_fg; // 前景色（`c_fg`）
+    gfx_color32_t c_bg; // 背景色（`c_bg`）
   } cache[DMA2D_LAYER_COUNT];
 
   // CLUT is configured according to the cache
+  // 用于表示 CLUT 是否已经根据缓存（cache）进行了配置
   bool clut_valid;
 
 } dma2d_driver_t;
-
+// 创建了一个静态的dma2d_driver_t类型的变量吗，
+// 并且初始化了initialized
+// 结构体的其他值将被默认初始化为零值或空值
 static dma2d_driver_t g_dma2d_driver = {
     .initialized = false,
 };
 
 // Returns `true` if the specified address is accessible by DMA2D
 // and can be used by any of the following functions
+// 检查指定的内存地址是否可以被 DMA2D 访问
+// 如果指定的地址可以被 DMA2D 访问并且可以被后续的函数使用，则返回 `true`
+// `inline` 关键字建议编译器将函数内联，以减少函数调用的开销。
 static inline bool dma2d_accessible(const void* ptr) {
 #ifdef STM32F4
+// 表示 CCM（Core Coupled Memory）的起始地址和结束地址。
   const void* ccm_start = (const void*)0x10000000;
   const void* ccm_end = (const void*)0x1000FFFF;
+  /*
+    检查 `ptr` 是否在 CCM 的地址范围内。
+    如果 `ptr` 的值在 `ccm_start` 和 `ccm_end` 之间（包括边界），
+    则返回 `false`，表示该地址不可被 DMA2D 访问。
+  */
   return !(ptr >= ccm_start && ptr <= ccm_end);
 #else
+// 如果没有定义 `STM32F4`，则直接返回 `true`，
+// 表示所有地址都可以被 DMA2D 访问。
   return true;
 #endif
 }

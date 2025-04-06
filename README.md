@@ -5,32 +5,32 @@
 ## Repository Structure
 
 * **[`ci`](ci/)**: [Gitlab CI](https://gitlab.com/satoshilabs/trezor/trezor-firmware) configuration files
-* **[`common/defs`](common/defs/)**: JSON coin definitions and support tables
-* **[`common/protob`](common/protob/)**: Common protobuf definitions for the Trezor protocol
-* **[`common/tools`](common/tools/)**: Tools for managing coin definitions and related data
-* **[`core`](core/)**: Trezor Core, firmware implementation for Trezor T
-* **[`crypto`](crypto/)**: Stand-alone cryptography library used by both Trezor Core and the Trezor One firmware
-* **[`docs`](docs/)**: Assorted documentation
-* **[`legacy`](legacy/)**: Trezor One firmware implementation
-* **[`python`](python/)**: Python [client library](https://pypi.org/project/trezor) and the `trezorctl` command
-* **[`storage`](storage/)**: NORCOW storage implementation used by both Trezor Core and the Trezor One firmware
-* **[`tests`](tests/)**: Firmware unit test suite
-* **[`tools`](tools/)**: Miscellaneous build and helper scripts
-* **[`vendor`](vendor/)**: Submodules for external dependencies
+* **[`common/defs`](common/defs/)**: JSON 币种定义和支持表
+* **[`common/protob`](common/protob/)**: Trezor 协议的通用 protobuf 定义
+* **[`common/tools`](common/tools/)**: 管理币种定义和相关数据的工具
+* **[`core`](core/)**: Trezor Core，Trezor T 的固件实现
+* **[`crypto`](crypto/)**: 独立的加密库，供 Trezor Core 和 Trezor One 固件使用
+* **[`docs`](docs/)**: 各种文档
+* **[`legacy`](legacy/)**: Trezor One 固件实现
+* **[`python`](python/)**: Python [客户端库](https://pypi.org/project/trezor) 和 `trezorctl` 命令
+* **[`storage`](storage/)**: NORCOW 存储实现，供 Trezor Core 和 Trezor One 固件使用
+* **[`tests`](tests/)**: 固件单元测试套件
+* **[`tools`](tools/)**: 各种构建和辅助脚本
+* **[`vendor`](vendor/)**: 外部依赖的子模块
 
 
 ## Contribute
 
 See [CONTRIBUTING.md](docs/misc/contributing.md).
 
-Using [Conventional Commits](COMMITS.md) is strongly recommended and might be enforced in future.
+强烈建议使用 [Conventional Commits](COMMITS.md)，未来可能会强制执行。
 
-Also please have a look at the docs, either in the `docs` folder or at  [docs.trezor.io](https://docs.trezor.io) before contributing. The [misc](docs/misc/index.md) chapter should be read in particular because it contains some useful assorted knowledge.
+在贡献之前，请查看 `docs` 文件夹中的文档或访问 [docs.trezor.io](https://docs.trezor.io)。特别是 [misc](docs/misc/index.md) 章节，因为它包含一些有用的知识。
 
 ## Security vulnerability disclosure
 
-Please report suspected security vulnerabilities in private to [security@satoshilabs.com](mailto:security@satoshilabs.com), also see [the disclosure section on the Trezor.io website](https://trezor.io/support/a/how-to-report-a-security-issue). Please do NOT create publicly viewable issues for suspected security vulnerabilities.
+请私下报告怀疑的安全漏洞至 [security@satoshilabs.com](mailto:security@satoshilabs.com)，也请参阅 [Trezor.io 网站上的披露部分](https://trezor.io/support/a/how-to-report-a-security-issue)。请不要为怀疑的安全漏洞创建公开可见的问题。
 
 ## Documentation
 
-See the `docs` folder or visit [docs.trezor.io](https://docs.trezor.io).
+请参阅 `docs` 文件夹或访问 [docs.trezor.io](https://docs.trezor.io)。

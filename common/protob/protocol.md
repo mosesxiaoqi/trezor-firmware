@@ -1,10 +1,15 @@
 # Trezor Protocol
+# Trezor 协议文档解析
+这个文档描述了 Trezor 硬件钱包与计算机或手机等主机设备之间通信使用的协议。主要内容包括
 
 ## version 1
+协议版本 1 的数据包结构
 
 Messages are sent in packets of 64 bytes.
+文档详细说明了消息如何按 64 字节的数据包传输：
 
 First packet has the following structure:
+第一个数据包结构
 
 | offset | length | type        | contents                                                                              |
 |--------|--------|-------------|---------------------------------------------------------------------------------------|
